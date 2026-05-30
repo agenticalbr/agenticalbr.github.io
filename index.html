@@ -1,109 +1,194 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agentical</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #0a0a0a;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            overflow: hidden;
-        }
-
-        .logo-container {
-            text-align: center;
-            animation: fadeIn 1.5s ease-out;
-        }
-
-        .logo-icon {
-            width: clamp(80px, 15vw, 140px);
-            height: clamp(80px, 15vw, 140px);
-            margin: 0 auto 24px;
-        }
-
-        .logo-text {
-            font-size: clamp(1.8rem, 5vw, 3.2rem);
-            font-weight: 300;
-            letter-spacing: 0.35em;
-            color: #ffffff;
-            text-transform: uppercase;
-        }
-
-        .logo-tagline {
-            margin-top: 12px;
-            font-size: clamp(0.65rem, 1.5vw, 0.85rem);
-            font-weight: 400;
-            letter-spacing: 0.2em;
-            color: rgba(255, 255, 255, 0.35);
-            text-transform: uppercase;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(12px);
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Agentical</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+
+            body {
+                min-height: 100vh;
+                background: #323353;
+                font-family: "Syne", sans-serif;
+                overflow: hidden;
             }
-        }
-    </style>
-</head>
-<body>
 
-    <div class="logo-container">
-        <!-- Logo SVG -->
-        <svg class="logo-icon" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Outer ring -->
-            <circle cx="70" cy="70" r="64" stroke="url(#grad1)" stroke-width="1.5" opacity="0.6"/>
+            #particles-canvas {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+            }
 
-            <!-- Inner geometric shape — hexagon -->
-            <polygon
-                points="70,22 111.6,46 111.6,94 70,118 28.4,94 28.4,46"
-                stroke="url(#grad1)" stroke-width="1.5" fill="none"/>
+            .logo-container {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 10;
+                text-align: center;
+                animation: fadeIn 2s ease-out;
+            }
 
-            <!-- Center node -->
-            <circle cx="70" cy="70" r="6" fill="url(#grad1)"/>
+            .logo-svg {
+                width: clamp(280px, 50vw, 532px);
+                height: auto;
+                display: block;
+                margin: 0 auto;
+            }
 
-            <!-- Connection lines -->
-            <line x1="70" y1="70" x2="70" y2="22" stroke="url(#grad1)" stroke-width="1" opacity="0.5"/>
-            <line x1="70" y1="70" x2="111.6" y2="46" stroke="url(#grad1)" stroke-width="1" opacity="0.5"/>
-            <line x1="70" y1="70" x2="111.6" y2="94" stroke="url(#grad1)" stroke-width="1" opacity="0.5"/>
-            <line x1="70" y1="70" x2="70" y2="118" stroke="url(#grad1)" stroke-width="1" opacity="0.5"/>
-            <line x1="70" y1="70" x2="28.4" y2="94" stroke="url(#grad1)" stroke-width="1" opacity="0.5"/>
-            <line x1="70" y1="70" x2="28.4" y2="46" stroke="url(#grad1)" stroke-width="1" opacity="0.5"/>
+            .tagline {
+                margin-top: 14px;
+                font-size: clamp(0.85rem, 2vw, 1.15rem);
+                font-weight: 400;
+                letter-spacing: 0.05em;
+                color: rgba(255, 255, 255, 0.7);
+            }
 
-            <!-- Outer dots -->
-            <circle cx="70" cy="22" r="3" fill="url(#grad1)" opacity="0.8"/>
-            <circle cx="111.6" cy="46" r="3" fill="url(#grad1)" opacity="0.8"/>
-            <circle cx="111.6" cy="94" r="3" fill="url(#grad1)" opacity="0.8"/>
-            <circle cx="70" cy="118" r="3" fill="url(#grad1)" opacity="0.8"/>
-            <circle cx="28.4" cy="94" r="3" fill="url(#grad1)" opacity="0.8"/>
-            <circle cx="28.4" cy="46" r="3" fill="url(#grad1)" opacity="0.8"/>
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translate(-50%, -50%) translateY(18px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translate(-50%, -50%) translateY(0);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="particles-canvas"></canvas>
 
-            <defs>
-                <linearGradient id="grad1" x1="0" y1="0" x2="140" y2="140">
-                    <stop offset="0%" stop-color="#6366f1"/>
-                    <stop offset="100%" stop-color="#a78bfa"/>
-                </linearGradient>
-            </defs>
-        </svg>
+        <div class="logo-container">
+            <svg
+                class="logo-svg"
+                viewBox="0 0 532 37"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M432.808 6.33217V14.4939H469.361V6.33217H432.808ZM420.838 1.05423L443.763 35.8778H458.62L481.759 1.05423H467.063L447.237 32.2322H455.2L435.534 1.05423H420.838Z"
+                    fill="#00D1FF"
+                />
+                <path
+                    d="M11.9705 30.6338V22.4721H48.5233V30.6338H11.9705ZM0 35.9118L22.9256 1.08823H37.7819L60.9213 35.9118H46.2254L26.3992 4.73382H34.3617L14.6959 35.9118H0Z"
+                    fill="#00D1FF"
+                />
+                <path
+                    d="M95.3143 37C90.6829 37 86.4255 36.7098 82.5422 36.1294C78.6946 35.5853 75.3457 34.6422 72.4956 33.3C69.6811 31.9216 67.4901 30.0534 65.9225 27.6956C64.3905 25.3377 63.6246 22.3632 63.6246 18.7721C63.6246 15.1809 64.4084 12.1882 65.9759 9.79412C67.5435 7.36372 69.788 5.44118 72.7093 4.02647C75.6663 2.57549 79.1755 1.54167 83.237 0.925001C87.334 0.308334 91.8 0 96.9175 0C103.508 0 109.031 0.616666 113.484 1.85C117.973 3.08333 121.393 4.84265 123.744 7.12794C126.096 9.37696 127.36 12.0613 127.538 15.1809H113.644C113.217 14.3828 112.495 13.6211 111.293 12.8956C110.153 12.1338 108.443 11.5172 106.163 11.0456C103.883 10.574 100.801 10.3382 96.9175 10.3382C92.3573 10.3382 88.6522 10.6284 85.8021 11.2088C82.9519 11.7529 80.8678 12.6417 79.5496 13.875C78.2314 15.1083 77.5723 16.7407 77.5723 18.7721C77.5723 20.5495 78.2492 22.0186 79.6031 23.1794C80.9569 24.3402 83.1301 25.2108 86.1227 25.7912C89.1153 26.3716 93.0699 26.6618 97.9863 26.6618C101.442 26.6618 104.435 26.5167 106.964 26.2265C109.529 25.9 111.845 25.4103 113.911 24.7574C116.013 24.1044 118.097 23.2882 120.16 22.3088L121.446 23.8868C119.238 28.1309 115.96 31.3775 111.613 33.6265C107.267 35.8755 101.834 37 95.3143 37ZM117.812 35.9118C117.812 34.8235 117.955 33.5902 118.24 32.2118C118.562 30.8333 118.881 29.4005 119.309 27.9132C119.772 26.3897 120.217 24.9569 120.645 23.6147H99.8033V17.9015H128.287V35.9118H117.812Z"
+                    fill="#00D1FF"
+                />
+                <path
+                    d="M151.257 21.2206V25.5735H191.872V35.9118H137.897V1.08823H191.765V11.4265H151.257V15.7794H184.39V21.2206H151.257Z"
+                    fill="#00D1FF"
+                />
+                <path
+                    d="M254.538 25.2471L249.568 28.1309V1.08823H262.928V35.9118H249.568L209.328 12.1882L214.297 9.25V35.9118H200.938V1.08823H214.297L254.538 25.2471Z"
+                    fill="#00D1FF"
+                />
+                <path
+                    d="M270.399 1.08823H325.976V11.4265H270.399V1.08823ZM291.507 10.7191H304.867V35.9118H291.507V10.7191Z"
+                    fill="#00D1FF"
+                />
+                <path
+                    d="M334.238 1.08823H347.598V35.9118H334.238V1.08823Z"
+                    fill="#00D1FF"
+                />
+                <path
+                    d="M421.341 21.3838C421.163 24.8299 419.934 27.7137 417.654 30.0353C415.373 32.3569 412.007 34.098 407.553 35.2588C403.136 36.4196 397.542 37 390.773 37C385.608 37 380.976 36.7098 376.879 36.1294C372.782 35.5853 369.291 34.6422 366.405 33.3C363.519 31.9216 361.31 30.0534 359.778 27.6956C358.246 25.3377 357.48 22.3632 357.48 18.7721C357.48 15.1809 358.246 12.1882 359.778 9.79412C361.31 7.36372 363.519 5.44118 366.405 4.02647C369.291 2.57549 372.782 1.54167 376.879 0.925001C380.976 0.308334 385.608 0 390.773 0C397.542 0 403.154 0.634804 407.607 1.90441C412.06 3.13775 415.427 4.96961 417.707 7.4C419.987 9.83039 421.216 12.7868 421.394 16.2691H407.5C407.072 15.1083 406.289 14.0926 405.149 13.2221C404.009 12.3152 402.299 11.6078 400.018 11.1C397.738 10.5922 394.657 10.3382 390.773 10.3382C386.213 10.3382 382.508 10.6284 379.658 11.2088C376.808 11.7529 374.724 12.6417 373.405 13.875C372.087 15.1083 371.428 16.7407 371.428 18.7721C371.428 20.6221 372.087 22.1275 373.405 23.2882C374.724 24.449 376.808 25.3015 379.658 25.8456C382.508 26.3897 386.213 26.6618 390.773 26.6618C394.657 26.6618 397.721 26.426 399.965 25.9544C402.245 25.4828 403.955 24.848 405.095 24.05C406.235 23.2157 407.019 22.327 407.447 21.3838H421.341Z"
+                    fill="#00D1FF"
+                />
+                <path
+                    d="M499.904 1.08823V25.5735H531.059V35.9118H486.544V1.08823H499.904Z"
+                    fill="#00D1FF"
+                />
+            </svg>
+            <div class="tagline">AI Corporate Agents</div>
+        </div>
 
-        <div class="logo-text">Agentical</div>
-        <div class="logo-tagline">Intelligent Agents</div>
-    </div>
+        <script>
+            const canvas = document.getElementById("particles-canvas");
+            const ctx = canvas.getContext("2d");
 
-</body>
+            let width, height;
+
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener("resize", resize);
+
+            // Particle grid for wave effect
+            const spacing = 18;
+            const cols = Math.ceil(width / spacing) + 2;
+            const rows = Math.ceil(height / spacing) + 2;
+
+            let time = 0;
+
+            function drawParticles() {
+                ctx.clearRect(0, 0, width, height);
+
+                const dotSize = 1.2;
+                const baseAlpha = 0.25;
+
+                // Multiple wave layers for organic feel
+                for (let col = 0; col < cols; col++) {
+                    for (let row = 0; row < rows; row++) {
+                        const x = col * spacing - spacing;
+                        const y = row * spacing - spacing;
+
+                        // Composite wave displacement
+                        const dx1 = Math.sin(y * 0.012 + time * 0.7) * 8;
+                        const dy1 = Math.cos(x * 0.012 + time * 0.5) * 6;
+
+                        const dx2 =
+                            Math.sin(y * 0.025 + x * 0.01 + time * 1.1) * 4;
+                        const dy2 =
+                            Math.cos(x * 0.02 - y * 0.015 + time * 0.8) * 3;
+
+                        const dx3 = Math.sin(y * 0.008 - time * 0.4) * 5;
+                        const dy3 = Math.cos(x * 0.008 + time * 0.3) * 4;
+
+                        const px = x + dx1 + dx2 + dx3;
+                        const py = y + dy1 + dy2 + dy3;
+
+                        // Alpha varies with wave position
+                        const waveFactor =
+                            Math.sin(y * 0.012 + time * 0.7) *
+                            Math.cos(x * 0.012 + time * 0.5);
+
+                        const alpha = Math.max(
+                            0.02,
+                            Math.min(0.6, baseAlpha + waveFactor * 0.35),
+                        );
+
+                        ctx.beginPath();
+                        ctx.arc(px, py, dotSize, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(100, 110, 180, ${alpha})`;
+                        ctx.fill();
+                    }
+                }
+
+                time += 0.012;
+                requestAnimationFrame(drawParticles);
+            }
+
+            drawParticles();
+        </script>
+    </body>
 </html>
