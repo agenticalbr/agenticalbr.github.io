@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import Glifo from '../components/Glifo.astro';
+import CTAFinal from '../components/CTAFinal.astro';
+import { produtos } from '../data/produtos';
+---
+<Base titulo="Manifesto ∀" descricao="O que é cultura agêntica, como pessoas e agentes trabalham juntos e por que a Agentical acredita em IA para todas as empresas.">
+  <section class="container-site pt-36 pb-16 sm:pt-44">
+    <p class="eyebrow">Sobre a Agentical</p>
+    <h1 class="mt-5 flex flex-wrap items-center gap-x-5 text-5xl text-white sm:text-7xl">
+      Manifesto <Glifo tipo="V" class="h-[0.7em] w-auto text-ciano" />
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg text-lavanda/80">
+      Na matemática, ∀ quer dizer "para todo". No nosso nome, é o último A, de ponta-cabeça. Este texto explica por quê.
+    </p>
+  </section>
+
+
+  <article class="bg-white text-marinho">
+    <div class="container-site prose prose-lg max-w-3xl py-20 prose-headings:font-display prose-headings:font-medium prose-headings:text-marinho prose-p:text-marinho/85 prose-a:text-marinho prose-strong:text-marinho">
+      <h2>1. Cultura agêntica é mais do que usar IA</h2>
+      <p>
+        Quase toda empresa já usa inteligência artificial: alguém escreve e-mails com ajuda de um chatbot, outro resume reuniões, um terceiro testa uma ferramenta nova a cada mês. Isso é uso. Não é cultura.
+      </p>
+      <p>
+        <strong>Cultura agêntica é quando a IA deixa de ser uma ferramenta na mão de alguns e passa a fazer parte de como a empresa inteira trabalha.</strong> Agentes de IA, que não só respondem mas executam tarefas, ligados aos sistemas, aos dados e aos processos do negócio. E pessoas que sabem trabalhar com eles.
+      </p>
+
+      <h2>2. A IA no centro da produtividade</h2>
+      <p>
+        Quando os agentes estão ligados à operação real, eles param de ser um experimento e viram parte do dia a dia: atendem o cliente no WhatsApp com a informação certa do estoque, mantêm o site atualizado, preparam o conteúdo da semana, juntam os números de sistemas que nunca conversaram.
+      </p>
+      <p>
+        O ganho não está em uma resposta mais rápida aqui e ali. Está em a empresa enxergar o que acontece, conversar sobre isso e agir, num só lugar.
+      </p>
+
+      <h2>3. Pessoas e agentes, lado a lado</h2>
+      <p>
+        Agentes não substituem a equipe. Eles tiram dela o trabalho repetitivo e devolvem tempo para o que só pessoas fazem bem: decidir, criar, negociar, cuidar de clientes.
+      </p>
+      <p>
+        No nosso logo, o A em pé e o ∀ invertido se encaixam. É assim que vemos o trabalho: pessoas definem o rumo, agentes executam, e nada importante sai sem aprovação humana. O agente sugere; a pessoa decide.
+      </p>
+
+      <h2>4. O que a Agentical faz</h2>
+      <p>
+        Criamos agentes de IA sob medida para pequenas e médias empresas. Cada produto cuida de uma parte da cultura agêntica:
+      </p>
+      <ul>
+        {produtos.map((p) => (
+          <li><a href={`/produtos/${p.slug}`}><strong>Agentical {p.nome}</strong></a> ({p.parte}): {p.chamada}</li>
+        ))}
+      </ul>
+
+      <h2>5. Cada empresa começa de um lugar diferente</h2>
+      <p>
+        Uma locadora precisa que o site mostre o carro disponível agora e que o cliente consiga agendar. Uma indústria precisa trocar de ERP sem perder dez anos de histórico. Uma empresa de serviços precisa que o WhatsApp pare de engolir o dia da equipe.
+      </p>
+      <p>
+        Por isso começamos pelo diagnóstico, e não pelo produto. Entendemos os processos, encontramos onde os agentes trazem mais valor e construímos a partir daí. Cada cliente novo é configuração sobre uma base comum, não um projeto do zero. É isso que torna o sob medida acessível.
+      </p>
+
+      <h2>6. Adoção responsável</h2>
+      <p>
+        Levar IA para o centro da empresa exige responsabilidade. Acreditamos em:
+      </p>
+      <ul>
+        <li><strong>Aprovação humana</strong> em tudo o que sai para clientes e para o mercado.</li>
+        <li><strong>Dados sob controle</strong>: organizados no servidor da solução, com a anuência da TI do cliente, e só o necessário enviado à IA, por contratos que não usam os dados para treinar modelos.</li>
+        <li><strong>Transparência</strong> sobre o que os agentes fazem, o que custam e onde erram.</li>
+        <li><strong>Respeito à LGPD</strong> e às regras que estão chegando para a IA no Brasil.</li>
+        <li><strong>Pessoas preparadas</strong>: ninguém deveria ter medo da ferramenta com que trabalha.</li>
+      </ul>
+
+      <h2>∀ empresas</h2>
+      <p>
+        Grandes corporações já têm times inteiros dedicados a IA. A pequena e a média empresa brasileira, que move boa parte da economia, quase sempre fica de fora, ou fica com ferramentas genéricas que não conversam com nada.
+      </p>
+      <p>
+        A Agentical existe para mudar isso. <strong>Cultura agêntica para todas as empresas, e para todas as pessoas dentro delas.</strong>
+      </p>
+    </div>
+  </article>
+
+  <CTAFinal titulo="Quer trazer essa cultura para a sua empresa?" />
+</Base>

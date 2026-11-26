@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Glifo from '../../components/Glifo.astro';
+
+const posts = (await getCollection('blog', ({ data }) => import.meta.env.DEV || !data.rascunho))
+  .sort((a, b) => b.data.data.valueOf() - a.data.data.valueOf());
+const fmt = new Intl.DateTimeFormat('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+---
+<Base titulo="Blog" descricao="Textos sobre cultura agêntica, agentes de IA e gestão de pequenas e médias empresas.">
+  <section class="container-site pt-36 pb-12 sm:pt-44">
+    <p class="eyebrow">Blog</p>
+    <h1 class="mt-5 flex flex-wrap items-center gap-x-4 text-5xl text-white sm:text-6xl">Para todos <Glifo tipo="V" class="h-[0.7em] w-auto text-ciano" /></h1>
+    <p class="mt-6 max-w-2xl text-lg text-lavanda/80">Cultura agêntica na prática: o que funciona, o que não funciona e como levar agentes de IA para o dia a dia da sua empresa.</p>
+  </section>
+
+  <section class="container-site pb-24">
+    {posts.length === 0 ? (
+      <p class="text-lavanda/60">Os primeiros textos estão a caminho.</p>
+    ) : (
+      <div class="divide-y divide-lavanda/10 border-y border-lavanda/10">
+        {posts.map((p) => (
+          <a href={`/blog/${p.id}`} class="group grid gap-2 py-10 sm:grid-cols-[12rem_1fr] sm:gap-10">
+            <p class="text-sm text-lavanda/50">{fmt.format(p.data.data)}{p.data.rascunho && <span class="ml-2 rounded bg-ciano/15 px-1.5 py-0.5 text-[11px] text-ciano">rascunho</span>}</p>
+            <div>
+              <h2 class="text-2xl text-white transition group-hover:text-ciano sm:text-3xl">{p.data.titulo}</h2>
+              <p class="mt-3 max-w-2xl text-lavanda/70">{p.data.descricao}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    )}
+  </section>
+</Base>

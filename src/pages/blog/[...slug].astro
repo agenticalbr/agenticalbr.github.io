@@ -1,0 +1,30 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import CTAFinal from '../../components/CTAFinal.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => import.meta.env.DEV || !data.rascunho);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+const fmt = new Intl.DateTimeFormat('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+---
+<Base titulo={post.data.titulo} descricao={post.data.descricao} tipo="article">
+  <section class="container-site pt-36 pb-14 sm:pt-44">
+    <a href="/blog" class="text-sm text-lavanda/60 hover:text-ciano">← Blog</a>
+    <p class="mt-8 text-sm text-lavanda/50">
+      {fmt.format(post.data.data)}
+      {post.data.rascunho && <span class="ml-2 rounded bg-ciano/15 px-1.5 py-0.5 text-[11px] text-ciano">rascunho — não publicado</span>}
+    </p>
+    <h1 class="mt-4 max-w-4xl text-4xl leading-[1.1] text-white sm:text-6xl">{post.data.titulo}</h1>
+    <p class="mt-6 max-w-2xl text-lg text-lavanda/80">{post.data.descricao}</p>
+  </section>
+  <article class="bg-white text-marinho">
+    <div class="container-site prose prose-lg max-w-3xl py-20 prose-headings:font-display prose-headings:font-medium prose-headings:text-marinho prose-p:text-marinho/85 prose-li:text-marinho/85 prose-strong:text-marinho prose-a:text-marinho prose-blockquote:border-ciano prose-blockquote:text-marinho">
+      <Content />
+    </div>
+  </article>
+  <CTAFinal />
+</Base>

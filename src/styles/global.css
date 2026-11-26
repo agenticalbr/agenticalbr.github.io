@@ -1,0 +1,63 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@import '@fontsource-variable/inter';
+@import '@fontsource/syne/400.css';
+@import '@fontsource/syne/500.css';
+
+/* Paleta oficial (arquivos/Cores.png) + dois tons derivados do #323353 */
+@theme {
+  --color-branco: #ffffff;
+  --color-preto: #000000;
+  --color-marinho: #323353;
+  --color-noite: #232440; /* marinho mais profundo, para contraste entre seções */
+  --color-lavanda: #e6e6fa;
+  --color-ciano: #00d1ff;
+  --color-pervinca: #646eb4; /* cor das partículas */
+
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  /* Syne no máximo em 500 — o ExtraBold é exclusivo do logo */
+  --font-display: 'Syne', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    @apply bg-marinho text-lavanda font-sans;
+  }
+  h1, h2, h3 {
+    @apply font-display font-medium tracking-tight;
+  }
+  ::selection {
+    @apply bg-ciano text-marinho;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ciano;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+  .btn-primario {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-ciano px-5 py-3 text-sm font-medium text-marinho transition hover:bg-white;
+  }
+  .btn-secundario {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-lavanda/30 px-5 py-3 text-sm font-medium text-lavanda transition hover:border-ciano hover:text-ciano;
+  }
+  .eyebrow {
+    @apply text-xs font-medium uppercase tracking-[0.18em] text-ciano;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import CTAFinal from '../../components/CTAFinal.astro';
+import { produtos } from '../../data/produtos';
+---
+<Base titulo="Produtos" descricao="As seis partes da cultura agêntica: Culture, Websites, Media, Attendants, Dashboards e Cockpit.">
+  <section class="container-site pt-36 pb-10 sm:pt-44">
+    <p class="eyebrow">Produtos</p>
+    <h1 class="mt-5 max-w-3xl text-4xl text-white sm:text-6xl">As seis partes da cultura agêntica.</h1>
+    <p class="mt-6 max-w-2xl text-lg text-lavanda/80">Comece por uma, cresça com todas. Cada agente novo se liga aos que já existem e amplia o que a sua empresa consegue fazer.</p>
+  </section>
+
+  <section class="container-site pb-24">
+    <div class="divide-y divide-lavanda/10 border-y border-lavanda/10">
+      {produtos.map((p, i) => (
+        <a href={`/produtos/${p.slug}`} class="group grid items-baseline gap-3 py-10 sm:grid-cols-[4rem_1fr_1.4fr_auto] sm:gap-8">
+          <span class="font-display text-sm text-ciano">0{i + 1}</span>
+          <div>
+            <h2 class="text-3xl text-white transition group-hover:text-ciano">{p.nome}</h2>
+            <p class="mt-1 text-xs uppercase tracking-[0.18em] text-lavanda/50">{p.parte}{p.destaque && ` · ${p.destaque}`}</p>
+          </div>
+          <p class="text-lavanda/75">{p.resumo}</p>
+          <span class="text-ciano transition group-hover:translate-x-1">→</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <CTAFinal />
+</Base>

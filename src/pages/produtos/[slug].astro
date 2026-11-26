@@ -1,0 +1,77 @@
+---
+import Base from '../../layouts/Base.astro';
+import ParticleField from '../../components/ParticleField.astro';
+import CTAFinal from '../../components/CTAFinal.astro';
+import { AGENDA_URL } from '../../consts';
+import { produtos, type Produto } from '../../data/produtos';
+
+export function getStaticPaths() {
+  return produtos.map((p) => ({ params: { slug: p.slug }, props: { p } }));
+}
+const { p } = Astro.props as { p: Produto };
+const outros = produtos.filter((o) => o.slug !== p.slug);
+---
+<Base titulo={`Agentical ${p.nome}`} descricao={p.resumo}>
+  <section class="relative isolate overflow-hidden">
+    <ParticleField class="opacity-60" />
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent to-marinho"></div>
+    <div class="container-site relative pt-36 pb-20 sm:pt-44">
+      <a href="/produtos" class="text-sm text-lavanda/60 hover:text-ciano">← Produtos</a>
+      <p class="eyebrow mt-8">Agentical {p.nome} · {p.parte}</p>
+      <h1 class="mt-5 max-w-4xl text-4xl leading-[1.08] text-white sm:text-6xl">{p.chamada}</h1>
+      <p class="mt-7 max-w-2xl text-lg leading-relaxed text-lavanda/85">{p.resumo}</p>
+      <a href={AGENDA_URL} class="btn-primario mt-10">Agendar conversa</a>
+    </div>
+  </section>
+
+  <section class="py-20">
+    <div class="container-site grid gap-14 lg:grid-cols-[1fr_1.6fr]">
+      <div>
+        <h2 class="text-2xl text-white sm:text-3xl">Se isso soa familiar</h2>
+        <ul class="mt-8 space-y-4">
+          {p.problema.map((x) => (
+            <li class="flex gap-3 text-lavanda/75"><span class="mt-2.5 h-px w-4 shrink-0 bg-lavanda/40"></span>{x}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h2 class="text-2xl text-white sm:text-3xl">O que o Agentical {p.nome} faz</h2>
+        <div class="mt-8 grid gap-4 sm:grid-cols-2">
+          {p.oQueFaz.map((f) => (
+            <div class="rounded-2xl border border-lavanda/10 bg-noite p-6">
+              <h3 class="text-lg text-white">{f.titulo}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-lavanda/70">{f.texto}</p>
+            </div>
+          ))}
+        </div>
+        {p.emBreve && (
+          <div class="mt-6 rounded-2xl border border-dashed border-ciano/40 p-6 text-sm text-lavanda/80">
+            <span class="eyebrow mr-2">Em breve</span>{p.emBreve.join(' ')}
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-lavanda py-16 text-marinho">
+    <div class="container-site max-w-4xl">
+      <p class="text-xs font-medium uppercase tracking-[0.18em] text-marinho/60">Parte de uma cultura</p>
+      <p class="mt-4 font-display text-2xl leading-snug sm:text-3xl">{p.conexao}</p>
+    </div>
+  </section>
+
+  <section class="py-20">
+    <div class="container-site">
+      <h2 class="text-xl text-white">As outras partes da cultura agêntica</h2>
+      <div class="mt-6 flex flex-wrap gap-3">
+        {outros.map((o) => (
+          <a href={`/produtos/${o.slug}`} class="rounded-full border border-lavanda/15 px-4 py-2 text-sm text-lavanda/80 transition hover:border-ciano hover:text-ciano">
+            {o.nome} <span class="text-lavanda/40">· {o.parte}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTAFinal />
+</Base>

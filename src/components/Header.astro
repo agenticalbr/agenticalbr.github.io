@@ -1,0 +1,35 @@
+---
+import Logo from './Logo.astro';
+import { AGENDA_URL, NAV } from '../consts';
+import { produtos } from '../data/produtos';
+const atual = Astro.url.pathname;
+const ativo = (href: string) => atual === href || atual.startsWith(href + '/');
+---
+<header class="absolute inset-x-0 top-0 z-40">
+  <div class="container-site flex h-20 items-center justify-between gap-6">
+    <a href="/" class="text-ciano" aria-label="Agentical — início"><Logo class="h-[9px] w-auto sm:h-2.5" /></a>
+
+    <nav class="hidden items-center gap-10 text-sm md:flex" aria-label="Principal">
+      {NAV.map((i) => (
+        <a href={i.href} class:list={['transition hover:text-ciano', ativo(i.href) ? 'text-ciano' : 'text-lavanda/85']}>{i.label}</a>
+      ))}
+      <a href={AGENDA_URL} class="btn-primario py-2.5">Agendar conversa</a>
+    </nav>
+
+    <details class="group md:hidden">
+      <summary class="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-lg border border-lavanda/20" aria-label="Abrir menu">
+        <svg class="h-5 w-5 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="hidden h-5 w-5 group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </summary>
+      <div class="absolute inset-x-4 top-20 rounded-2xl border border-lavanda/10 bg-noite/95 p-6 shadow-2xl backdrop-blur">
+        <ul class="space-y-4">
+          {NAV.map((i) => <li><a href={i.href} class="font-display text-xl">{i.label}</a></li>)}
+        </ul>
+        <ul class="mt-4 grid grid-cols-2 gap-2 border-t border-lavanda/10 pt-4 text-sm text-lavanda/70">
+          {produtos.map((p) => <li><a href={`/produtos/${p.slug}`}>{p.nome}</a></li>)}
+        </ul>
+        <a href={AGENDA_URL} class="btn-primario mt-6 w-full">Agendar conversa</a>
+      </div>
+    </details>
+  </div>
+</header>

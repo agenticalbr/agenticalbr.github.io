@@ -1,0 +1,15 @@
+---
+import { AGENDA_URL } from '../consts';
+interface Props { titulo?: string; texto?: string }
+const {
+  titulo = 'Vamos começar pela sua empresa?',
+  texto = 'Uma conversa para entender sua operação e mostrar onde os agentes podem fazer diferença.',
+} = Astro.props;
+---
+<section class="relative overflow-hidden bg-noite">
+  <div class="container-site flex flex-col items-center py-20 text-center sm:py-28">
+    <h2 class="max-w-2xl text-3xl text-white sm:text-5xl">{titulo}</h2>
+    <p class="mt-5 max-w-xl text-lavanda/75">{texto}</p>
+    <a href={AGENDA_URL} class="btn-primario mt-8">Agendar conversa</a>
+  </div>
+</section>

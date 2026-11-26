@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import { CONTATO_EMAIL } from '../consts';
+---
+<Base titulo="Privacidade" descricao="Como a Agentical trata dados neste site e nas soluções que constrói para clientes.">
+  <section class="container-site pt-36 pb-10 sm:pt-44">
+    <p class="eyebrow">Privacidade</p>
+    <h1 class="mt-5 max-w-3xl text-4xl text-white sm:text-6xl">Seus dados, com controle e transparência.</h1>
+  </section>
+
+  <article class="bg-white text-marinho">
+    <div class="container-site prose max-w-3xl py-20 prose-headings:font-display prose-headings:font-medium prose-headings:text-marinho prose-p:text-marinho/85 prose-li:text-marinho/85">
+      <h2>Neste site</h2>
+      <p>
+        Este site não usa cookies de rastreamento, não tem ferramentas de publicidade e não coleta dados pessoais. As fontes são servidas pelo próprio site, sem chamadas a serviços de terceiros.
+      </p>
+      <p>
+        Ao clicar em "Agendar conversa", você é levado à página de agendamento do Google Agenda, que tem a própria política de privacidade do Google.
+      </p>
+
+      <h2>Nas soluções que construímos</h2>
+      <ul>
+        <li>Os dados de cada cliente ficam organizados no servidor da solução, com a anuência da equipe de TI do cliente.</li>
+        <li>Só o necessário para cada tarefa é enviado aos modelos de IA, por API, sob contratos que não permitem usar esses dados para treinar modelos.</li>
+        <li>Alguns provedores de IA processam dados fora do Brasil. Quando isso acontece, tratamos a transferência internacional conforme a LGPD e informamos o cliente.</li>
+        <li>Tudo o que sai para clientes e para o mercado passa por aprovação humana.</li>
+      </ul>
+      <p>
+        Nosso objetivo é oferecer, no futuro, modelos de IA rodando em infraestrutura própria. Quando isso for viável, contaremos aqui.
+      </p>
+
+      <h2>Contato</h2>
+      <p>
+        Dúvidas sobre privacidade e dados pessoais:
+        {CONTATO_EMAIL ? <a href={`mailto:${CONTATO_EMAIL}`}>{CONTATO_EMAIL}</a> : <mark>[e-mail de contato a definir]</mark>}
+      </p>
+    </div>
+  </article>
+</Base>

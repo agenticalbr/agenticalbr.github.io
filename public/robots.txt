@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://agentical.com.br/sitemap-index.xml

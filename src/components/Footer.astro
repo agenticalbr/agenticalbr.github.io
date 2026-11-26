@@ -1,0 +1,36 @@
+---
+import Logo from './Logo.astro';
+import Glifo from './Glifo.astro';
+import { AGENDA_URL } from '../consts';
+import { produtos } from '../data/produtos';
+const ano = new Date().getFullYear();
+---
+<footer class="border-t border-lavanda/10 bg-noite">
+  <div class="container-site grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr]">
+    <div>
+      <Logo class="h-2.5 w-auto text-ciano" />
+      <p class="mt-5 max-w-xs text-sm leading-relaxed text-lavanda/70">
+        Cultura agêntica para todas as empresas. Agentes de IA sob medida, ligados aos seus sistemas, aos seus dados e à sua equipe.
+      </p>
+      <a href={AGENDA_URL} class="btn-primario mt-6">Agendar conversa</a>
+    </div>
+    <div>
+      <p class="eyebrow">Produtos</p>
+      <ul class="mt-4 space-y-2 text-sm">
+        {produtos.map((p) => <li><a class="text-lavanda/80 hover:text-ciano" href={`/produtos/${p.slug}`}>Agentical {p.nome}</a></li>)}
+      </ul>
+    </div>
+    <div>
+      <p class="eyebrow">Agentical</p>
+      <ul class="mt-4 space-y-2 text-sm">
+        <li><a class="text-lavanda/80 hover:text-ciano" href="/manifesto">Manifesto ∀</a></li>
+        <li><a class="text-lavanda/80 hover:text-ciano" href="/blog">Blog</a></li>
+        <li><a class="text-lavanda/80 hover:text-ciano" href="/privacidade">Privacidade</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container-site flex items-center justify-between border-t border-lavanda/10 py-6 text-xs text-lavanda/50">
+    <span>© {ano} Agentical</span>
+    <span class="flex items-center gap-1 text-lavanda/40"><Glifo tipo="A" class="h-3 w-auto" /><Glifo tipo="V" class="h-3 w-auto -ml-1" /></span>
+  </div>
+</footer>
